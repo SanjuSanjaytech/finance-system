@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         enum: ['admin', 'analyst', 'viewer'],
         default: 'viewer'
     },
-    inActive: {
+    isActive: {
         type: Boolean,
         default: true
     }
