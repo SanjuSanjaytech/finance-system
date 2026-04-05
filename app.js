@@ -25,7 +25,7 @@ app.use("/api/dashboard", dashboardRoutes);
 
 // route
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.send("API is running...")
 })
 
 export default app
