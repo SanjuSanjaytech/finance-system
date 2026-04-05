@@ -26,8 +26,39 @@ export const addTransaction = async (req, res) => {
 // Get transactions for the logged-in user
 
 export const getTransactions = async (req, res) => {
+
+    const { type, category, startDate, endDate } = req.query;
     try{
-        const transactions = await Transaction.find().populate(
+
+        let filter = {}
+
+        // Filter by the type
+
+        if (type) {
+            filter.type = type.toLowerCase();
+        }
+
+        // filter by the category
+
+        if (category) {
+            filter.category = category
+        }
+
+        // Filter by the date range
+
+        if (startDate || endDate) {
+            filter.date = {}
+
+            if (startDate) {
+                filter.date.$gte = new Date(startDate)
+            }
+            if (endDate) {
+                filter.date.$lte  = new Date(endDate)
+            }
+        }
+        console.log(req.query);
+
+        const transactions = await Transaction.find(filter).populate(
             "createdBy",
             "name email role"
         )
