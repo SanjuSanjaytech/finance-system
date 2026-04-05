@@ -4,6 +4,7 @@ import cors from 'cors'
 import authRoutes from "./routes/authRoutes.js"
 import userRoutes from "./routes/userRoutes.js";
 import financeRoutes from "./routes/financeRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 
 dotenv.config()
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", financeRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 
 
