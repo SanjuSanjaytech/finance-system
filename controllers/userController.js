@@ -15,6 +15,10 @@ export const updateUserRole = async (req, res) => {
   try {
     const { role } = req.body;
 
+    if (!["admin", "analyst", "viewer"].includes(role)) {
+      return res.status(400).json({ msg: "Invalid role" });
+    }
+
     const user = await User.findById(req.params.id).select("-password");
 
     if (!user) return res.status(404).json({ msg: "User not found" });
@@ -32,6 +36,10 @@ export const updateUserRole = async (req, res) => {
 export const updateUserStatus = async (req, res) => {
   try {
     const { isActive } = req.body;
+
+    if (typeof isActive !== "boolean") {
+      return res.status(400).json({ msg: "isActive must be true or false" });
+    }
 
     const user = await User.findById(req.params.id).select("-password");
 
